@@ -1,0 +1,5 @@
+resources/
+result/
+*.json
+todo.txt
+temp/*.*
