@@ -1,5 +1,9 @@
 resources/
 result/
+generated/
 *.json
 todo.txt
 temp/*.*
+*/todo
+*/TODO
+TODO
