@@ -1,9 +1,10 @@
 package redis_cache
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/s-vvardenfell/Adipiscing/generated"
+	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
 
@@ -12,9 +13,9 @@ type RedisClientStub struct {
 }
 
 func NewClientStub(host, port string) *RedisClientStub {
-	conn, err := grpc.Dial(host+port, grpc.WithInsecure())
+	conn, err := grpc.Dial(fmt.Sprintf("%s:%s", host, port), grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		logrus.Fatalf("cannot connect to host< %s> and port <%s>: %v", host, port, err)
 	}
 	return &RedisClientStub{
 		c: generated.NewUserServiceClient(conn),

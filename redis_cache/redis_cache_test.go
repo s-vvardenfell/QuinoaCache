@@ -5,42 +5,57 @@ import (
 	"log"
 	"math/rand"
 	"net"
+	"os"
+	"path/filepath"
 	"strconv"
 	"testing"
 	"time"
 
 	"github.com/s-vvardenfell/Adipiscing/generated"
+	"github.com/s-vvardenfell/Adipiscing/utility"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
+	"gopkg.in/yaml.v3"
 )
 
-const (
-	redisPort = "6379"
-	servePort = ":50051"
-	host      = "localhost"
-)
-
-func RunServer() {
+func RunServer(cnfg map[string]interface{}) {
 	grpcServ := grpc.NewServer()
-	rcs := NewServer("localhost", redisPort, "", 0)
+	rcs := NewServer(
+		cnfg["host"].(string),
+		cnfg["redis_port"].(string),
+		cnfg["pasword"].(string),
+		cnfg["db_num"].(int),
+	)
 	generated.RegisterUserServiceServer(grpcServ, rcs)
 
-	lis, err := net.Listen("tcp", servePort)
+	lis, err := net.Listen("tcp", ":"+cnfg["server_port"].(string))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	log.Printf("Starting gRPC listener on port " + servePort)
+	log.Printf("Starting gRPC listener on port " + cnfg["server_port"].(string))
 	if err := grpcServ.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }
 
 func Test_pckg(t *testing.T) {
+	wd, err := os.Getwd()
+	require.NoError(t, err)
 
-	go RunServer()
+	f, err := os.Open(filepath.Join(filepath.Join(wd, ".."), "resources/config_test.yml"))
+	require.NoError(t, err)
 
-	time.Sleep(2 * time.Second)
+	cnfg := make(map[string]interface{})
+
+	err = yaml.Unmarshal(utility.BytesFromReader(f), &cnfg)
+	require.NoError(t, err)
+
+	t.Logf("%v", cnfg)
+
+	go RunServer(cnfg)
+
+	time.Sleep(1 * time.Second)
 
 	var key, val string
 	t.Log("\tGenerating random key and value")
@@ -50,13 +65,13 @@ func Test_pckg(t *testing.T) {
 		val = strconv.Itoa(rand.Intn(1000))
 	}
 
-	s := NewClientStub(host, servePort)
+	s := NewClientStub(cnfg["host"].(string), cnfg["server_port"].(string))
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	t.Log("\tSet value")
 	{
-		res, err := s.c.Set(ctx, &generated.Input{Key: key, Val: val, Exp: 0})
+		res, err := s.c.Set(ctx, &generated.Input{Key: key, Val: val, Exp: 1000})
 		require.NoError(t, err)
 		require.Equal(t, res.Ok, true)
 	}
