@@ -24,11 +24,15 @@ jobs:
     - name: Install Protoc
       uses: arduino/setup-protoc@v1
 
-    - name: Genereate code for squzy-storage protofile
+    - name: Genereate code 1
       uses: PxyUp/protoc-actions@v3.0.0
       with:
-        # path: -I./ --go_opt=paths=source_relative --go_out=./generated example/v1/test.proto
-        path: -I./ proto/service.proto --go_out=. --go-grpc_out=./ proto/service.proto
+        path: --go-grpc_out=. proto/service.proto
+
+    - name: Genereate code 2
+      uses: PxyUp/protoc-actions@v3.0.0
+      with:
+        path: --go_out=. proto/service.proto
 
     # - name: Install grpc-go
     #   run: |
