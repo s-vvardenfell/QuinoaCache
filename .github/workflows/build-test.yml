@@ -21,18 +21,16 @@ jobs:
     - name: Set up Redis server
       uses: supercharge/redis-github-action@1.4.0
 
-    - name: Install Protoc
-      uses: arduino/setup-protoc@v1
+    - name: Installing protoc-gen-go
+      run: |
+        go get github.com/golang/protobuf/protoc-gen-go
+        go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
-    - name: Genereate code 1
-      uses: PxyUp/protoc-actions@v3.0.0
-      with:
-        path: --go-grpc_out=. proto/service.proto
+    - name: Generating protos
+      run: |
+        protoc -I=./ --go_out=. $(find proto -type f -name '*.proto')
+        protoc --go-grpc_out=. proto/service.proto
 
-    - name: Genereate code 2
-      uses: PxyUp/protoc-actions@v3.0.0
-      with:
-        path: --go_out=. proto/service.proto
 
     # - name: Install grpc-go
     #   run: |
@@ -54,3 +52,4 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
