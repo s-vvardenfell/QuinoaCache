@@ -32,9 +32,8 @@ jobs:
         
     - name: Setup Environment
       run: |
-        export GOROOT=/usr/lib/go
-        export GOPATH=$HOME/go
-        export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+        echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
+        source $HOME/.bashrc
 
     - name: Generating protos
       run: |
