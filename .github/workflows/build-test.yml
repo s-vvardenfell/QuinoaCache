@@ -34,10 +34,11 @@ jobs:
 
     - name: Generating grpc
       run: |
-        cd generated
-        ls -l
         chmod +x ./gen.sh
         ./gen.sh
+        cd generated
+        ls -l
+        cd ..
 
     - name: Build
       run: go build -v ./...
