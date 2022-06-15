@@ -28,10 +28,10 @@ jobs:
         go get github.com/golang/protobuf/protoc-gen-go
         go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
         go get -u google.golang.org/grpc
-        # echo 'export GOPATH=$HOME/Go' >> $HOME/.bashrc
-        # source $HOME/.bashrc
-        # echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
-        # source $HOME/.bashrc
+        echo 'export GOPATH=$HOME/Go' >> $HOME/.bashrc
+        source $HOME/.bashrc
+        echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
+        source $HOME/.bashrc
         export PATH=$PATH:$GOPATH/bin
 
     - name: Generating protos
