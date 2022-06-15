@@ -24,13 +24,10 @@ jobs:
     - name: Install Protoc
       uses: arduino/setup-protoc@v1
 
-
-    - name: Download dependencies
-      run: go mod download
-
     - name: Install grpc-go
       run: |
         go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+        sudo apt install golang-goprotobuf-dev
         echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
         source $HOME/.bashrc
 
