@@ -44,7 +44,7 @@ func (s *Server) Set(ctx context.Context, in *generated.Input) (*generated.Ok, e
 	err := s.client.Set(ctx, in.Key, in.Val, time.Duration(in.Exp)*time.Second).Err()
 	if err != nil {
 		return &generated.Ok{Ok: false}, status.Errorf(codes.Internal,
-			"cannot set value  %s with key %s to Redis", in.Val, in.Key, err)
+			"cannot set value  %s with key %s to Redis, %v", in.Val, in.Key, err)
 	}
 	return &generated.Ok{Ok: true}, nil
 }
