@@ -31,12 +31,14 @@ jobs:
         go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
         # echo 'export GOPATH=$HOME/Go' >> $HOME/.bashrc
         # source $HOME/.bashrc
-        # echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
-        # source $HOME/.bashrc
+        echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
+        source $HOME/.bashrc
         # export GOPATH=$(go env GOPATH)
         # export PATH=$PATH:$GOPATH/bin
-        export GO_PATH=~/go
-        export PATH=$PATH:/$GO_PATH/bin
+        # export GO_PATH=~/go
+        # export PATH=$PATH:/$GO_PATH/bin
+        echo $GOPATH
+        echo $PATH
 
     - name: Generating protos
       run: |
