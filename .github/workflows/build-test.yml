@@ -21,6 +21,11 @@ jobs:
     - name: Redis Server in GitHub Actions
       uses: supercharge/redis-github-action@1.4.0
 
+    - name: Generating grpc
+      run: |
+        chmod +x ./gen.sh
+        ./gen.sh
+
     - name: Build
       run: go build -v ./...
 
