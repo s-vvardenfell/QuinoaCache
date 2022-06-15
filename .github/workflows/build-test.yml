@@ -26,16 +26,17 @@ jobs:
 
     - name: Install grpc-go
       run: |
-        go get -u google.golang.org/grpc
+        sudo apt install protobuf-compiler
         sudo apt install golang-goprotobuf-dev
+        go get -u google.golang.org/grpc
         echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
         source $HOME/.bashrc
-        go mod tidy
 
     - name: Generating grpc
       run: |
         chmod +x ./gen.sh
         ./gen.sh
+        go mod tidy
 
     - name: Build
       run: go build -v ./...
