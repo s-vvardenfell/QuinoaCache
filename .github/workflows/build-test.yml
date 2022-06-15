@@ -27,18 +27,15 @@ jobs:
     - name: Install grpc-go
       run: |
         go get -u google.golang.org/grpc
-        go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
         sudo apt install golang-goprotobuf-dev
         echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
         source $HOME/.bashrc
+        go mod tidy
 
     - name: Generating grpc
       run: |
         chmod +x ./gen.sh
         ./gen.sh
-        cd generated
-        ls -l
-        cd ..
 
     - name: Build
       run: go build -v ./...
