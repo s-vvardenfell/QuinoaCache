@@ -23,13 +23,16 @@ jobs:
 
     - name: Installing protoc-gen-go
       run: |
-        go get github.com/golang/protobuf/protoc-gen-go
-        go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
         sudo apt install protobuf-compiler
         sudo apt install golang-goprotobuf-dev
+        go get github.com/golang/protobuf/protoc-gen-go
+        go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
         go get -u google.golang.org/grpc
-        echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
-        source $HOME/.bashrc
+        # echo 'export GOPATH=$HOME/Go' >> $HOME/.bashrc
+        # source $HOME/.bashrc
+        # echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
+        # source $HOME/.bashrc
+        export PATH=$PATH:$GOPATH/bin
 
     - name: Generating protos
       run: |
@@ -37,16 +40,7 @@ jobs:
         protoc --go_out=. proto/service.proto
 
 
-    # - name: Install grpc-go
-    #   run: |
-    #     go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
-    #     sudo apt install protobuf-compiler
-    #     sudo apt install golang-goprotobuf-dev
-    #     go get -u google.golang.org/grpc
-    #     echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
-    #     source $HOME/.bashrc
-
-    # - name: Generating grpc
+    # - name: Generating protos
     #   run: |
     #     chmod +x ./gen.sh
     #     ./gen.sh
