@@ -37,11 +37,12 @@ jobs:
         # export PATH=$PATH:$GOPATH/bin
         # export GO_PATH=~/go
         # export PATH=$PATH:/$GO_PATH/bin
-        echo $GOPATH
-        echo $PATH
+
 
     - name: Generating protos
       run: |
+        export GOPATH=$(go env GOPATH)
+        export PATH=$PATH:$GOPATH/bin
         protoc --go-grpc_out=. proto/service.proto
         protoc --go_out=. proto/service.proto
 
