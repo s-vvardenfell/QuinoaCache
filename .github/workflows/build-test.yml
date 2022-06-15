@@ -25,15 +25,21 @@ jobs:
       run: |
         go get -u google.golang.org/grpc
         go get -u google.golang.org/protobuf
-        go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
-        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
         sudo apt install protobuf-compiler
         sudo apt install golang-goprotobuf-dev
+
+        go get -u google.golang.org/protobuf/cmd/protoc-gen-go
+        go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+        go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
+        go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
         
     - name: Setup Environment
       run: |
-        echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.bashrc
-        source $HOME/.bashrc
+        export GOROOT=/usr/local/go
+        export GOPATH=$HOME/go
+        export GOBIN=$GOPATH/bin
+        export PATH=$PATH:$GOROOT:$GOPATH:$GOBIN
+        source ~/.bash_profile
 
     - name: Generating protos
       run: |
