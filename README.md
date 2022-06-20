@@ -1,4 +1,4 @@
-# Adipiscing <br>
+# QuinoaCache <br>
 Redis server with grpc API for Quinoa project<br>
 Use `gen.sh` to generate grpc-code from proto/service.proto
 
