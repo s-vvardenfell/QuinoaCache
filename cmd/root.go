@@ -21,7 +21,7 @@ var cfgFile string
 var cnfg config.Config
 
 var rootCmd = &cobra.Command{
-	Use:   "Adipiscing",
+	Use:   "QuinoaCache",
 	Short: "Redis-cache grpc server for Quinoa project",
 	Run: func(cmd *cobra.Command, args []string) {
 		logrus.Info("QuinoaCache started...")
