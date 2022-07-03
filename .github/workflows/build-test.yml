@@ -43,8 +43,8 @@ jobs:
 
     - name: Generating protos
       run: |
-        protoc --go-grpc_out=. proto/service.proto
-        protoc --go_out=. proto/service.proto
+        protoc --go-grpc_out=. proto/proto.proto
+        protoc --go_out=. proto/proto.proto
 
     # - name: Generating protos
     #   run: |
