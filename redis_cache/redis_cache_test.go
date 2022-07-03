@@ -26,7 +26,7 @@ func RunServer(cnfg map[string]interface{}) {
 		cnfg["pasword"].(string),
 		cnfg["db_num"].(int),
 	)
-	generated.RegisterUserServiceServer(grpcServ, rcs)
+	generated.RegisterRedisCacheServiceServer(grpcServ, rcs)
 
 	lis, err := net.Listen("tcp", ":"+cnfg["server_port"].(string))
 	if err != nil {

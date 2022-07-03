@@ -12,7 +12,7 @@ import (
 )
 
 type Server struct {
-	generated.UnimplementedUserServiceServer
+	generated.UnimplementedRedisCacheServiceServer
 	client *redis.Client
 }
 
