@@ -1,4 +1,7 @@
 # QuinoaCache <br>
+
+[![build-test](https://github.com/s-vvardenfell/QuinoaCache/actions/workflows/build-test.yml/badge.svg)](https://github.com/s-vvardenfell/QuinoaCache/actions/workflows/build-test.yml) <br>
+
 Redis server with grpc API for Quinoa project<br>
 Use `gen.sh` to generate grpc-code from proto/service.proto
 
