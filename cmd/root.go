@@ -26,7 +26,7 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		grpcServ := grpc.NewServer()
 		rcs := redis_cache.NewServer(cnfg.Host, cnfg.RedisPort, cnfg.Passw, cnfg.DataBaseNum)
-		generated.RegisterUserServiceServer(grpcServ, rcs)
+		generated.RegisterRedisCacheServiceServer(grpcServ, rcs)
 
 		lis, err := net.Listen("tcp", fmt.Sprintf("%s:%s", cnfg.Host, cnfg.ServerPort))
 		if err != nil {
