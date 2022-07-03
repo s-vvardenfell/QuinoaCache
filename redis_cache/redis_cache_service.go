@@ -19,7 +19,7 @@ type Server struct {
 func NewServer(host, port, passw string, db int) *Server {
 	return &Server{
 		client: redis.NewClient(&redis.Options{
-			Addr:     fmt.Sprintf("%s:%s", host, port), //:6379
+			Addr:     fmt.Sprintf("%s:%s", host, port),
 			Password: passw,
 			DB:       db,
 		}),

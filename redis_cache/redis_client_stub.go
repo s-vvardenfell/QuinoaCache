@@ -14,7 +14,8 @@ type RedisClientStub struct {
 }
 
 func NewClientStub(host, port string) *RedisClientStub {
-	conn, err := grpc.Dial(fmt.Sprintf("%s:%s", host, port), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(fmt.Sprintf("%s:%s", host, port),
+		grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		logrus.Fatalf("cannot connect to host <%s> and port <%s>: %v", host, port, err)
 	}
