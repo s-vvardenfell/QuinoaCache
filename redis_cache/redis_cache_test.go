@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/s-vvardenfell/Adipiscing/generated"
-	"github.com/s-vvardenfell/Adipiscing/utility"
+	"github.com/s-vvardenfell/QuinoaCache/generated"
+	"github.com/s-vvardenfell/QuinoaCache/utility"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 	"gopkg.in/yaml.v3"

@@ -7,9 +7,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/s-vvardenfell/Adipiscing/config"
-	"github.com/s-vvardenfell/Adipiscing/generated"
-	"github.com/s-vvardenfell/Adipiscing/redis_cache"
+	"github.com/s-vvardenfell/QuinoaCache/config"
+	"github.com/s-vvardenfell/QuinoaCache/generated"
+	"github.com/s-vvardenfell/QuinoaCache/redis_cache"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -21,9 +21,11 @@ var cfgFile string
 var cnfg config.Config
 
 var rootCmd = &cobra.Command{
-	Use:   "adipiscing",
-	Short: "Redis-cache grpc server",
+	Use:   "Adipiscing",
+	Short: "Redis-cache grpc server for Quinoa project",
 	Run: func(cmd *cobra.Command, args []string) {
+		logrus.Info("QuinoaCache started...")
+
 		grpcServ := grpc.NewServer()
 		rcs := redis_cache.NewServer(cnfg.Host, cnfg.RedisPort, cnfg.Passw, cnfg.DataBaseNum)
 		generated.RegisterRedisCacheServiceServer(grpcServ, rcs)

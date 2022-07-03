@@ -3,7 +3,7 @@ package redis_cache
 import (
 	"fmt"
 
-	"github.com/s-vvardenfell/Adipiscing/generated"
+	"github.com/s-vvardenfell/QuinoaCache/generated"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

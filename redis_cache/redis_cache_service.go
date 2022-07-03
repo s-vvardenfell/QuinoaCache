@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis/v9"
-	"github.com/s-vvardenfell/Adipiscing/generated"
+	"github.com/s-vvardenfell/QuinoaCache/generated"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

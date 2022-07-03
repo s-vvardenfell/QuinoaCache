@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/s-vvardenfell/Adipiscing/cmd"
+	"github.com/s-vvardenfell/QuinoaCache/cmd"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module github.com/s-vvardenfell/Adipiscing
+module github.com/s-vvardenfell/QuinoaCache
 
 go 1.18
 
